@@ -2,14 +2,13 @@
 #include "ui_setsencwind.h"
 #include "QLayout"
 #include "QComboBox"
-#define Max_Widget 4
 SetSencWind::SetSencWind(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::SetSencWind)
 {
     ui->setupUi(this);
     ui->numSencor->setMinimum(1);
-    ui->numSencor->setMaximum(Max_Widget);
+    ui->numSencor->setMaximum(4);
 }
 
 SetSencWind::~SetSencWind()
@@ -40,5 +39,8 @@ void SetSencWind::on_numSencor_valueChanged(int arg1) {
             sensor->deleteLater();                      // Очищаем память
         }
     }
+
+    ui->numSencor->setMaximum(sensors[0]->bonesNum);
 }
+
 

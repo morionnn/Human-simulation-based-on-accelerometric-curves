@@ -28,28 +28,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QComboBox" name="comboBox">
-     <item>
-      <property name="text">
-       <string>Л. Рука</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>П. Рука</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Л. Нога</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>П. Нога</string>
-      </property>
-     </item>
-    </widget>
+    <widget class="QComboBox" name="comboBox"/>
    </item>
   </layout>
  </widget>

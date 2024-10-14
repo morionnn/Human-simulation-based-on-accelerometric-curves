@@ -2,7 +2,8 @@ QT       += core gui
 
 QT +=openglwidgets
 
-QT += 3dcore 3drender 3dinput 3dextras
+QT += 3dcore 3drender 3dinput 3dextras 3danimation
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = Graph3D
@@ -18,6 +19,7 @@ INCLUDEPATH += $$PWD/sensor
 SOURCES += \
     3D/Graph3DWidget.cpp \
     3D/anim3dwidget.cpp \
+    3D/bonesanimation.cpp \
     main.cpp \
     mainwindow.cpp \
     sensor/sensor.cpp \
@@ -26,6 +28,7 @@ SOURCES += \
 
 HEADERS += \
     3D/anim3dwidget.h \
+    3D/bonesanimation.h \
     3D/graph3dwidget.h \
     mainwindow.h \
     sensor/sensor.h \
@@ -46,6 +49,7 @@ DISTFILES += \
     .gitattributes \
     README.md \
     data/BaseHuman.fbx \
+    data/BaseHuman2.gltf \
     data/data.csv \
     data/sencor/DATA000.TXT \
     data/sencor/DATA001.TXT \

@@ -5,6 +5,7 @@
 #include "QLayout"
 #include <sensorwidget.h>
 
+
 namespace Ui {
 class SetSencWind;
 }
