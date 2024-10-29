@@ -1,0 +1,10 @@
+debug/animationthread.o
+debug/main.o
+debug/mainwindow.o
+debug/sensor.o
+debug/sensorwidget.o
+debug/setsencwind.o
+debug/moc_mainwindow.o
+debug/moc_sensor.o
+debug/moc_sensorwidget.o
+debug/moc_setsencwind.o

@@ -16,6 +16,7 @@ SetSencWind::~SetSencWind()
     delete ui;
 }
 
+
 void SetSencWind::on_numSencor_valueChanged(int arg1) {
     numSencor = arg1;
 
@@ -40,7 +41,19 @@ void SetSencWind::on_numSencor_valueChanged(int arg1) {
         }
     }
 
-    ui->numSencor->setMaximum(sensors[0]->bonesNum);
+    //ui->numSencor->setMaximum(sensors[0]->bonesNum);
 }
 
+
+
+void SetSencWind::on_saveButton_clicked()
+{
+    //Сохранение нового списка имен костей
+    bonesName.clear();
+    for(int i=0; i < sensors.length(); i++){
+        bonesName.append(sensors[i]->getName());
+    }
+    //Сигнал о новых настройках
+    emit saveSet(bonesName);
+}
 

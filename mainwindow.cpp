@@ -4,7 +4,10 @@
 #include <QOpenGLWidget>
 #include "QStringList"
 #include "QFileDialog"
+#include <Qt3DCore/QEntity>
+#include <Qt3DCore/QTransform>
 
+bool animIsStart = false;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -12,19 +15,24 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     settingSencor = new SetSencWind(this);
+    dataFile = new QFile();
 
     timerForData = new QTimer();
     timerForData->setInterval(TIMESPEED);
 
     connect(timerForData, &QTimer::timeout , this, &MainWindow::getAxData);
-    ui->animationWidget->createPlaneXY();
-    ui->animationWidget->loadModel("data\\BaseHuman2.gltf");
+    connect(settingSencor, &SetSencWind::saveSet, this, &MainWindow::saveSensorSetting);
+
+    ui->widget->repaint();
+    //ui->animationWidget->createPlaneXY();
+    //ui->animationWidget->loadModel("data\\BaseHuman2.gltf");
+    //bonesBody = new BonesAnimation(ui->animationWidget->rootEntity);
+    //bonesBody->createAnimation("data\\BaseHuman2.gltf");
 
 }
 
-
-
 //Функции обработки значений с датчиков
+//------------------------------------------------
 QMatrix3x3 rotationMatrix(QVector3D angle) {
     QVector3D radians (qDegreesToRadians(angle.x()), qDegreesToRadians(angle.y()),qDegreesToRadians(angle.z()));  // Преобразование угла из градусов в радианы
     QMatrix3x3 matrix_x;
@@ -109,6 +117,7 @@ QVector3D findPos(QVector3D acceleration, QVector3D angular_velocity, QVector3D 
     //Новая координата
     return lastPos+angular_grad;
 }
+//----------------------------------------------------
 
 MainWindow::~MainWindow()
 {
@@ -118,41 +127,33 @@ MainWindow::~MainWindow()
 void MainWindow::getAxData()
 {
 
-//    if(!dataFile->atEnd()){
-//        QStringList data = QString(dataFile->readLine()).split(";");
-//        QVector3D acceleration(data[1].toInt(),data[2].toInt(),data[3].toInt());
-//        QVector3D angular_velocity(data[4].toInt(), data[5].toInt(),data[6].toInt());
+    if(!dataFile->atEnd()){
+        QStringList data = QString(dataFile->readLine()).split(";");
+        QVector3D acceleration(data[1].toFloat(),data[2].toFloat(),data[3].toFloat());
+        QVector3D angular_velocity(data[4].toFloat(), data[5].toFloat(),data[6].toFloat());
 
-//        lastPos = findPos(acceleration,angular_velocity, lastPos);
-//        //if(newTrajectory.size() > 100) newTrajectory.erase(newTrajectory.begin());
+        lastPos = findPos(acceleration,angular_velocity, lastPos);
+        //if(newTrajectory.size() > 100) newTrajectory.erase(newTrajectory.begin());
 
-//        newTrajectory.push_back(lastPos);
-//        ui->graph3D->updateBuffer(newTrajectory);
-//        ui->graph3D->redraw();
+        newTrajectory.push_back(lastPos);
 
+    }else{
+        dataFile->close();
+        QVector3D nulVec(0,0,0);
+        lastPos = nulVec;
 
-//    }else{
-//        dataFile->close();
-//        QVector3D nulVec(0,0,0);
-//        lastPos = nulVec;
+        newTrajectory.clear();
 
-//        newTrajectory.clear();
-
-//        ui->graph3D->updateBuffer(newTrajectory);
-//        ui->graph3D->redraw();
-//        dataFile->open(QIODevice::ReadOnly | QIODevice::Text);
-//        getAxData();
-
-//        //Пропуск первой заголовочной строки
-//        dataFile->readLine();
-//    }
+        dataFile->open(QIODevice::ReadOnly | QIODevice::Text);
+        getAxData();
+    }
 
 }
 
 
 void MainWindow::on_downloadButton_clicked()
 {
-    QString fileName = QFileDialog::getOpenFileName(this, "Выберите файл", "", "Все файлы (*.*);;Текстовые файлы (*.txt)");
+    QString fileName = QFileDialog::getOpenFileName(this, "Выберите файл", "", "Текстовые файлы (*.txt)");
     if(fileName!=""){
         dataFile->setFileName(fileName);
     }
@@ -165,5 +166,39 @@ void MainWindow::on_setSencbutton_clicked()
     if(!settingSencor->isVisible()){
         settingSencor->show();
     }
+}
+
+
+void MainWindow::on_pushButton_clicked()
+{
+    if(animIsStart){
+        ui->pushButton->setText("Пуск");
+        timerForData->stop();
+    }else{
+        ui->pushButton->setText("Стоп");
+        timerForData->start();
+    }
+    animIsStart = !animIsStart;
+}
+
+
+void MainWindow::saveSensorSetting(QVector<QString> listNames)
+{
+    if (listNames.isEmpty()) {
+        qDebug() << "No joint names provided.";
+        return;
+    }
+
+    QString jointName = listNames[0];
+    Qt3DCore::QTransform newTransform;
+    //newTransform.setTranslation(QVector3D(1.0f, 2.0f, 3.0f));
+    newTransform.setRotation(QQuaternion::fromEulerAngles(30.0f, 45.0f, 60.0f));
+    //newTransform.setScale(10);
+
+    qDebug() << "Transforming joint:" << jointName;
+    //ui->animationWidget->transformBone(jointName, newTransform);
+
+    // Вместо repaint, возможно, стоит использовать более специфичный метод обновления
+    // ui->animationWidget->update(); // для обновления виджета
 }
 

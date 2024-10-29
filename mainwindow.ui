@@ -24,7 +24,7 @@
        <number>7</number>
       </property>
       <item>
-       <widget class="Anim3DWidget" name="animationWidget" native="true">
+       <widget class="AnimationWidget" name="widget" native="true">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -69,7 +69,7 @@
         <item>
          <spacer name="verticalSpacer">
           <property name="orientation">
-           <enum>Qt::Vertical</enum>
+           <enum>Qt::Orientation::Vertical</enum>
           </property>
           <property name="sizeHint" stdset="0">
            <size>
@@ -99,9 +99,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>Anim3DWidget</class>
+   <class>AnimationWidget</class>
    <extends>QWidget</extends>
-   <header location="global">anim3dwidget.h</header>
+   <header location="global">animationwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

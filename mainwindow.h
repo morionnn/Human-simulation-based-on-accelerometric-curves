@@ -1,15 +1,19 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "QtQuickWidgets/QQuickWidget"
+#include "AnimationWidget.h"
 #include <QMainWindow>
 #include "qtimer.h"
 #include "QFile"
-#include "3D/Graph3DWidget.h"
-#include "3D/anim3dwidget.h"
 #include "setsencwind.h"
+#include <Qt3DCore/QEntity>
+#include <Qt3DAnimation/QAnimationClip>
+#include <Qt3DAnimation/QAnimationController>
 
-#define TIMESPEED 12
-#define TIMESTEP 12
+
+#define TIMESPEED 10
+#define TIMESTEP 10
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -28,6 +32,7 @@ private:
     Ui::MainWindow *ui;
     QTimer *timerForData;
     QFile *dataFile;
+    //BonesAnimation* bonesBody;
 
     bool isStart = false;
     std::vector<QVector3D> newTrajectory;
@@ -38,5 +43,7 @@ private slots:
     void getAxData();
     void on_downloadButton_clicked();
     void on_setSencbutton_clicked();
+    void on_pushButton_clicked();
+    void saveSensorSetting(QVector<QString> listNames);
 };
 #endif // MAINWINDOW_H

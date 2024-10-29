@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Animation.qml</file>
+        <file>model/BaseHuman.gltf</file>
+        <file>model/BaseHuman.bin</file>
+        <file>model/BaseHuman.fbx</file>
+    </qresource>
+</RCC>

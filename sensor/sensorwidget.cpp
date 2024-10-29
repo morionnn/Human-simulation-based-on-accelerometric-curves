@@ -52,7 +52,6 @@ void sensorWidget::loadBonesFromFile(const QString &filePath)
     QJsonArray nodesArray = jsonObj["nodes"].toArray();
 
     // Перебираем узлы и извлекаем имена костей
-    QVector<QString> boneNames; // Вектор для хранения имен костей
     for (const QJsonValue &nodeValue : nodesArray) {
         QJsonObject nodeObj = nodeValue.toObject();
         if (nodeObj.contains("name")) {
@@ -69,4 +68,9 @@ void sensorWidget::loadBonesFromFile(const QString &filePath)
     }
 
     qDebug() << "Loaded bones from file:" << filePath;
+}
+
+QString sensorWidget::getName()
+{
+    return ui->comboBox->currentText().split(". ")[1];
 }
