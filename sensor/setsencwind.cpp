@@ -41,7 +41,7 @@ void SetSencWind::on_numSencor_valueChanged(int arg1) {
         }
     }
 
-    //ui->numSencor->setMaximum(sensors[0]->bonesNum);
+    ui->numSencor->setMaximum(sensors[0]->bonesNum);
 }
 
 
