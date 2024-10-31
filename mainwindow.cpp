@@ -192,16 +192,13 @@ void MainWindow::saveSensorSetting(QVector<QString> listNames)
         return;
     }
 
-    QString jointName = listNames[0];
-    Qt3DCore::QTransform newTransform;
-    //newTransform.setTranslation(QVector3D(1.0f, 2.0f, 3.0f));
-    newTransform.setRotation(QQuaternion::fromEulerAngles(30.0f, 45.0f, 60.0f));
-    //newTransform.setScale(10);
+    QVector3D rotar(45,45,45); //поворот по x,y,z
+    QVector3D coord(45,45,45); //новые координаты по x,y,z
+    for(auto jointName:listNames){
+        //ui->widget->rotarBones(jointName, rotar); // поворот
+        ui->widget->rotarBones(jointName, coord); //Перемещение
+        qDebug() << "Transforming joint:" << jointName;
+    }
 
-    qDebug() << "Transforming joint:" << jointName;
-    //ui->animationWidget->transformBone(jointName, newTransform);
-
-    // Вместо repaint, возможно, стоит использовать более специфичный метод обновления
-    // ui->animationWidget->update(); // для обновления виджета
 }
 

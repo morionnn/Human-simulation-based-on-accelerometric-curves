@@ -18,14 +18,53 @@ AnimationWidget::AnimationWidget(QWidget *parent)
     humanObject = rootObject->findChild<QObject*>("human");
 }
 
-void AnimationWidget::moveBones(int id, QVector3D pos)
+void AnimationWidget::moveBones(QString boneName, QVector3D pos)
 {
+    // Поиск нужной кости по имени
+    QObject* targetBone = nullptr;
+    for (auto *bone : bones) {
+        if (bone->objectName() == boneName) {
+            targetBone = bone;
+            break;
+        }
+    }
 
+    // Проверка, что кость найдена
+    if (!targetBone) {
+        qDebug() << "Кость" << boneName << "не найдена";
+        return;
+    }
+
+    // Установка нового значения позиции для найденной кости
+    targetBone->setProperty("position", pos);
+
+    qDebug() << "Позиция для кости" << boneName << "установлена в" << pos;
 }
 
-void AnimationWidget::rotarBones(int id, QVector3D rot)
+void AnimationWidget::rotarBones(QString boneName, QVector3D rot)
 {
+    // Поиск нужной кости по имени
+    QObject* rotarBone = nullptr;
+    for (auto *bone : bones) {
+        if (bone->objectName() == boneName) {
+            rotarBone = bone;
+            break;
+        }
+    }
 
+    // Проверка, что кость найдена
+    if (!rotarBone) {
+        qDebug() << "Кость" << boneName << "не найдена";
+        return;
+    }
+
+    // Преобразуем углы поворота в кватернион
+    QQuaternion newRotation = QQuaternion::fromEulerAngles(rot);
+
+    // Устанавливаем новый поворот для найденной кости
+    rotarBone->setProperty("rotation", newRotation);
+
+    qDebug() << "Поворот для кости" << boneName << "установлен в" << rot;
 }
 
 // Вспомогательная функция для рекурсивного добавления костей и их дочерних объектов
