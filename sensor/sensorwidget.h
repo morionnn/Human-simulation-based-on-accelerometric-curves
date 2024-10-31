@@ -12,6 +12,16 @@
 #include <QJsonObject>
 #include <QJsonArray>
 
+#include <Qt3DCore/QEntity>
+#include <Qt3DCore/QNode>
+#include <Qt3DCore/QJoint>
+#include <Qt3DCore/QSkeletonLoader>
+#include <Qt3DCore/QSkeleton>
+#include <Qt3DCore/QTransform>
+#include <QString>
+#include <QUrl>
+#include <QComboBox>
+
 namespace Ui {
 class sensorWidget;
 }
@@ -31,7 +41,7 @@ public:
 
 private:
     Ui::sensorWidget *ui;
-
+    void collectBoneNames(const Qt3DCore::QJoint* joint);
 };
 
 #endif // SENSORWIDGET_H
