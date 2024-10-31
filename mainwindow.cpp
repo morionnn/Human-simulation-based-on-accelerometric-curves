@@ -23,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(timerForData, &QTimer::timeout , this, &MainWindow::getAxData);
     connect(settingSencor, &SetSencWind::saveSet, this, &MainWindow::saveSensorSetting);
 
+    //----
     ui->widget->repaint();
     //ui->animationWidget->createPlaneXY();
     //ui->animationWidget->loadModel("data\\BaseHuman2.gltf");
