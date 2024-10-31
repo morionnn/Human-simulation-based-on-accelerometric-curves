@@ -26,9 +26,9 @@ MainWindow::MainWindow(QWidget *parent)
     //----
     ui->widget->repaint();
     //ui->animationWidget->createPlaneXY();
-    //ui->animationWidget->loadModel("3d/model/BaseHuman.gltf");
+    //ui->animationWidget->loadModel("data\\BaseHuman2.gltf");
     //bonesBody = new BonesAnimation(ui->animationWidget->rootEntity);
-    //bonesBody->createAnimation("3d/model/BaseHuman.gltf");
+    //bonesBody->createAnimation("data\\BaseHuman2.gltf");
 
 }
 
@@ -151,6 +151,7 @@ void MainWindow::getAxData()
 
 }
 
+
 void MainWindow::on_downloadButton_clicked()
 {
     QString fileName = QFileDialog::getOpenFileName(this, "Выберите файл", "", "Текстовые файлы (*.txt)");
@@ -159,6 +160,7 @@ void MainWindow::on_downloadButton_clicked()
     }
 
 }
+
 
 void MainWindow::on_setSencbutton_clicked()
 {
