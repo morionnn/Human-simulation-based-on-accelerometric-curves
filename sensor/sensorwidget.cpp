@@ -6,6 +6,7 @@ sensorWidget::sensorWidget(QWidget *parent) :
     ui(new Ui::sensorWidget)
 {
     ui->setupUi(this);
+    bonesNum = 0;
 }
 
 sensorWidget::~sensorWidget()
@@ -17,9 +18,7 @@ void sensorWidget::setSencorNum(int num)
 {
     bonesNum = 0;
     ui->labelNum->setText("Датчик "+ QString::number(num));
-    loadBonesFromFile("data\\BaseHuman2.gltf");
-
-
+    loadBonesFromFile("model\\BaseHuman.gltf");
 }
 
 void sensorWidget::loadBonesFromFile(const QString &filePath)

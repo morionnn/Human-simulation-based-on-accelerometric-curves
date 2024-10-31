@@ -9,6 +9,7 @@ SetSencWind::SetSencWind(QWidget *parent) :
     ui->setupUi(this);
     ui->numSencor->setMinimum(1);
     ui->numSencor->setMaximum(4);
+    ui->numSencor->setValue(1);
 }
 
 SetSencWind::~SetSencWind()
@@ -28,6 +29,7 @@ void SetSencWind::on_numSencor_valueChanged(int arg1) {
             sensors.append(sensor);                    // Добавляем в список
             sensors.back()->setSencorNum(sensors.length());
             ui->mainLayout->insertWidget(sensors.length()-1, sensor);         // Добавляем в макет
+            //ui->numSencor->setMaximum(sensors[0]->bonesNum);
         }
     }
 
@@ -41,7 +43,7 @@ void SetSencWind::on_numSencor_valueChanged(int arg1) {
         }
     }
 
-    ui->numSencor->setMaximum(sensors[0]->bonesNum);
+
 }
 
 
