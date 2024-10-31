@@ -25,6 +25,7 @@ public:
     ~sensorWidget();
     void setSencorNum(int num);
     void loadBonesFromFile(const QString &filePath); // Метод для загрузки имен костей из файла
+    void refresh();
     int bonesNum;
     QVector<QString> boneNames; // Вектор для хранения имен костей
     QString getName();

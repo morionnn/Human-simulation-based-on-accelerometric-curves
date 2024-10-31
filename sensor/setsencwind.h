@@ -22,9 +22,11 @@ signals:
     void numSencChange();
     void saveSet(QVector<QString> listNames);
 
+public slots:
+    void setBonesName(QVector<QString> bonesNames);
+
 private slots:
     void on_numSencor_valueChanged(int arg1);
-
     void on_saveButton_clicked();
 
 private:
@@ -32,6 +34,7 @@ private:
     int numSencor;
     QVector<sensorWidget* > sensors;
     QVector<QString> bonesName;
+    QVector<QString> allBonesNames;
 };
 
 #endif // SETSENCWIND_H

@@ -46,7 +46,7 @@ Node {
         alphaMode: PrincipledMaterial.Opaque
     }
     Skin {
-        id: skin
+        id: skin        
         joints: [
             root,
             pelvis,

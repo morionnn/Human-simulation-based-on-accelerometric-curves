@@ -22,6 +22,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(timerForData, &QTimer::timeout , this, &MainWindow::getAxData);
     connect(settingSencor, &SetSencWind::saveSet, this, &MainWindow::saveSensorSetting);
+    connect(ui->widget, &AnimationWidget::bonesIsSet, settingSencor, &SetSencWind::setBonesName);
+    ui->widget->setBones();
 
     //----
     ui->widget->repaint();

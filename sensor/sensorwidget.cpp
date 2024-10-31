@@ -18,7 +18,7 @@ void sensorWidget::setSencorNum(int num)
 {
     bonesNum = 0;
     ui->labelNum->setText("Датчик "+ QString::number(num));
-    loadBonesFromFile("model\\BaseHuman.gltf");
+    //loadBonesFromFile("model\\BaseHuman.gltf");
 }
 
 void sensorWidget::loadBonesFromFile(const QString &filePath)
@@ -67,6 +67,17 @@ void sensorWidget::loadBonesFromFile(const QString &filePath)
     }
 
     qDebug() << "Loaded bones from file:" << filePath;
+}
+
+void sensorWidget::refresh()
+{
+    bonesNum = 0;
+    // Загружаем имена костей в QComboBox
+    ui->comboBox->clear(); // Очистка QComboBox перед добавлением новых имен
+    for (const QString &boneName : boneNames) {
+        bonesNum++;
+        ui->comboBox->addItem(QString::number(bonesNum) + ". " + boneName); // Добавляем имя кости в QComboBox
+    }
 }
 
 QString sensorWidget::getName()

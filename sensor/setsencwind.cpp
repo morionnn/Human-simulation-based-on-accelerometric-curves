@@ -27,9 +27,11 @@ void SetSencWind::on_numSencor_valueChanged(int arg1) {
         for (int i = 0; i < delta; ++i) {
             sensorWidget *sensor = new sensorWidget();  // Создаём новый виджет датчика
             sensors.append(sensor);                    // Добавляем в список
+            sensor->boneNames = allBonesNames;
+            sensor->refresh();
             sensors.back()->setSencorNum(sensors.length());
             ui->mainLayout->insertWidget(sensors.length()-1, sensor);         // Добавляем в макет
-            //ui->numSencor->setMaximum(sensors[0]->bonesNum);
+
         }
     }
 
@@ -44,6 +46,16 @@ void SetSencWind::on_numSencor_valueChanged(int arg1) {
     }
 
 
+}
+
+void SetSencWind::setBonesName(QVector<QString> bonesNames)
+{
+    allBonesNames = bonesNames;
+    ui->numSencor->setMaximum(allBonesNames.length());
+    for(int i =0; i < sensors.length(); i++){
+        sensors[i]->boneNames = bonesNames;
+        sensors[i]->refresh();
+    }
 }
 
 

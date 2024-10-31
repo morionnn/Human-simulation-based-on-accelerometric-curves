@@ -10,9 +10,18 @@ class AnimationWidget : public QWidget {
 public:
     explicit AnimationWidget(QWidget *parent = nullptr);
 
+signals:
+    void bonesIsSet(QVector<QString> bonesName);
+
+public slots:
+    void moveBones(int id, QVector3D pos); //Преместить кость по номеру датчика (новая координата)
+    void rotarBones(int id, QVector3D rot); //Повернуть кость по номеру датчика (новый угол поворота)
+    void setBones();
 private:
+    void addBoneAndChildren(QObject *bone);
     QQuickWidget *quickWidget;
     QObject *humanObject;
+    QVector<QObject *> bones; //ССылка на кости, номер элемента соответсвует номеру датчика
 };
 
 #endif // ANIMATIONWIDGET_H
