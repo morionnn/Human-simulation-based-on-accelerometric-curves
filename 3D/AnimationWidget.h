@@ -12,6 +12,7 @@ public:
 
 private:
     QQuickWidget *quickWidget;
+    QObject *humanObject;
 };
 
 #endif // ANIMATIONWIDGET_H

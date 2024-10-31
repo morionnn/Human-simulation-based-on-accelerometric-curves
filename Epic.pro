@@ -47,6 +47,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 DISTFILES += \
     .gitattributes \
+    3D/model/BaseHuman.qml \
     README.md \
     3D/animation.qml \
     data/BaseHuman.fbx \

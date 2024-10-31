@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick3D
 import QtQuick3D.Helpers
+import "model/"
 
 View3D {
     width: 800
@@ -46,34 +47,25 @@ View3D {
     }
 
     // 3D-модель с загруженным скелетом и анимацией
-    Model {
-        id: model
-        //source: "qrc:/model/BaseHuman.gltf"  // Путь модели
+    // Model {
+    //     id: model
 
-        //----------EXAMPLE---------------
-        source:"#Cube"
-        materials: PrincipledMaterial {
-                baseColor: "red"
-                lighting: PrincipledMaterial.NoLighting
-            }
-        //--------------------------------
+    //     //----------EXAMPLE---------------
+    //     source:"#Cube"
+    //     materials: PrincipledMaterial {
+    //             baseColor: "red"
+    //             lighting: PrincipledMaterial.NoLighting
+    //         }
+    //     //--------------------------------
 
+    //     position: Qt.vector3d(0, 0, 0)
+    //     scale: Qt.vector3d(1.0, 1.0, 1.0)
+    // }
+
+    BaseHuman {
+        id: human
+        objectName: "human"
         position: Qt.vector3d(0, 0, 0)
-        scale: Qt.vector3d(1.0, 1.0, 1.0)
-
-        // Настройка скелета модели
-        // Skeleton {
-        //     id: qmlskeleton
-        //     // Укажите корневой сустав, если это требуется
-        //     rootJoint: model.joints[0]  // Предполагается, что у модели есть суставы
-        // }
-
-        // Контроллер анимации для воспроизведения скелетной анимации
-        // Animator {
-        //     id: animator
-        //     running: true
-        //     loops: Animation.Infinite
-        //     onStopped: console.log("Animation stopped")
-        // }
+        scale: Qt.vector3d(100.0, 100.0, 100.0)
     }
 }
